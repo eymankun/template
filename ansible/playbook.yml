@@ -1,0 +1,9 @@
+---
+- hosts: target 1 #change target host
+  gather_facts: false
+  become: true
+  vars_files:
+    - "vars/default.yml"
+  roles:
+    - role1 # need change
+    - role2 # need change

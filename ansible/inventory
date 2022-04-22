@@ -1,0 +1,8 @@
+[group1]
+servername1
+servername2
+
+[group1:vars]
+ansible_user=username
+ansible_password=password
+ansible_become_password=very-secure-password
