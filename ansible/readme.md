@@ -2,10 +2,25 @@
 
 this page is project structure template for ansible.
 
+- [How to use](#how-to-use)
 - [Directory/File names and descriptions](#directoryfile-names-and-descriptions)
   - [Directories names](#directories-names)
   - [Files names](#files-names)
 - [Run the Ansible Playbook](#run-the-ansible-playbook)
+
+## How to use
+
+Clone this template project to local directory.
+Files that need to be changed are as below.
+
+- `playbook.yml`
+- `inventory`
+- `./vars/default.yml`
+- files under `roles` directory
+- files under `file` directory (if needed).
+
+**Notes**:
+for invetory file, it is recommeneded to encrypt it with `ansible-vault` command.
 
 ## Directory/File names and descriptions
 
