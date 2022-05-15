@@ -1,0 +1,48 @@
+---
+kind: pipeline
+name: Build site & deploy
+type: docker
+steps:
+  - name: build mkdocs & deploy
+    image: squidfunk/mkdocs-material
+    volumes:
+      - name: site
+        path: /site
+    commands:
+      - pip install -r ./requirements.txt
+      - cd contents && mkdocs build
+      - cp -r site/ /site
+      - chmod -R 777 /site
+
+  - name: discord notification
+    image: appleboy/drone-discord
+    settings:
+      avatar_url:
+      from_secret: avatar_url
+      webhook_id:
+        from_secret: discord_webhook_id
+      webhook_token:
+        from_secret: discord_webhook_token
+      message: >
+        {{#success build.status}}
+          ✅ Deploy succeeded!
+          {{build.link}}
+        {{else}}
+          ❌ Deploy failed.
+          {{build.link}}
+        {{/success}}
+    when:
+      status:
+        - success
+        - failure
+
+volumes:
+  - name: site
+    host:
+      path: /home/sunny/docker/mkdocswiki
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
