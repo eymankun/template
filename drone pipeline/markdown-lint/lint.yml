@@ -1,0 +1,52 @@
+---
+kind: pipeline
+name: Syntex Check
+type: docker
+steps:
+  - name: Lint
+    image: osshelp/drone-linter
+    settings:
+      yml_files:
+        - contents/mkdocs.yml
+      markdown_files:
+        - contents/docs/index.md
+        - readme.md
+  - name: discord notification
+    image: appleboy/drone-discord
+    settings:
+      avatar_url:
+      from_secret: avatar_url
+      webhook_id:
+        from_secret: discord_webhook_id
+      webhook_token:
+        from_secret: discord_webhook_token
+      message: >
+        {{#success build.status}}
+          ✅ Build succeeded!
+          Build #{{build.number}}
+          Repo name: {{repo.name}}
+          Branch: `{{commit.branch}}`
+          Author: {{commit.author}}
+          Message: {{commit.message}}
+          {{build.link}}
+        {{else}}
+          ❌ Build failed.
+          Build #{{build.number}}
+          Repo name: {{repo.name}}
+          Branch: `{{commit.branch}}`
+          Author: {{commit.author}}
+          Message: {{commit.message}}
+          {{build.link}}
+        {{/success}}
+    when:
+      status:
+        - success
+        - failure
+
+trigger:
+  branch:
+    - dev
+    - main
+  event:
+    - push
+    - cron
