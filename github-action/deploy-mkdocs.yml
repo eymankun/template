@@ -1,0 +1,33 @@
+---
+name: build-and-deploy
+
+on:
+  push:
+    branches:
+      - main
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "contents/docs/*"
+  #     - "contents/mkdocs.yml"
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install requirements
+        run: pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Configuration before deploy
+        run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Publish docs
+        run: mkdocs gh-deploy --config-file contents/mkdocs.yml
