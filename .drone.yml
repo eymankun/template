@@ -15,7 +15,7 @@ steps:
         - "github-action/*.yml"
       markdown_files:
         - "**/*.md"
-        - "./**"
+        - "*.md"
 
 trigger:
   branch:
