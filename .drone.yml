@@ -1,0 +1,18 @@
+---
+kind: pipeline
+name: housekeeping
+type: docker
+steps:
+  - name: Lint
+    image: osshelp/drone-linter
+    settings:
+      yml_files:
+        - "**/*.yml"
+      markdown_files:
+        - "**/*.md"
+
+trigger:
+  branch:
+    - dev
+  event:
+    - push
