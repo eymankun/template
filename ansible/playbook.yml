@@ -1,5 +1,5 @@
 ---
-- hosts: target 1 #change target host
+- hosts: target 1 # change target host
   gather_facts: false
   become: true
   vars_files:
