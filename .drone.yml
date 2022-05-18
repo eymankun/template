@@ -6,6 +6,7 @@ steps:
   - name: Lint
     image: osshelp/drone-linter
     settings:
+      exclude_regex: "(inventory)"
       yml_files:
         - "**/*.yml"
         - "ansible/*"
