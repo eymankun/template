@@ -8,8 +8,11 @@ steps:
     settings:
       exclude_regex: "(inventory)"
       yml_files:
-        - "**/*.yml"
-        - "ansible/*"
+        - "ansible/*.yml"
+        - "ansible/vars/*.yml"
+        - "ansible/roles/*"
+        - "drone/**/*.yml"
+        - "github-action/*.yml"
       markdown_files:
         - "**/*.md"
         - "./**"
