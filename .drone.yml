@@ -8,8 +8,10 @@ steps:
     settings:
       yml_files:
         - "**/*.yml"
+        - "ansible/*"
       markdown_files:
         - "**/*.md"
+        - "./**"
 
 trigger:
   branch:
