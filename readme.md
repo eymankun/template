@@ -1,6 +1,6 @@
 # Template Collection
 
-Template collection to setting up homelab.
+Template collection to setting up homelab and devops.
 
 [![Build Status](https://cicd.sunnyrabo.com/api/badges/sunnyrabo/template/status.svg)](https://cicd.sunnyrabo.com/sunnyrabo/template)
 
